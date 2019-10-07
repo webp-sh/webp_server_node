@@ -9,11 +9,11 @@ const IMG_PATH = "/PATH/TO/pics"
 
 // Define the catch-all interface
 app.get('/*',function(req,res){
+		// Get requested URL and concatenate absolute path and URL
         var requested_img_path = path.join(IMG_PATH, req.originalUrl);
-        var store_path = path.parse(requested_img_path)
 
-        var cache_path = path.join(__dirname,"webp/" + req.originalUrl.split(".")[0]);
-        console.log("cache "+cache_path);
+        var cache_path = path.join(__dirname,"webp/" + path.dirname(req.originalUrl));
+		console.log("CACHE PATH is " + cache_path)
         var cache_image_path = path.join(__dirname,"webp/" + req.originalUrl.split(".")[0] + ".webp");
 
 		// Make Cache path for the processed images
@@ -33,6 +33,5 @@ app.get('/*',function(req,res){
                 console.log("Convert" + requested_img_path);
                 console.log(status,error);
         })
-
 })
 app.listen(port, () => console.log(`WebP Server is listening on port ${port}!`))
