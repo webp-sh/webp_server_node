@@ -1,6 +1,6 @@
 # WebP Server
 
-**THIS PROJECT IS UNDER EARLY DEVELOPMENT, DON'T USE IT ON PRODUCTION ENVIORMENT.**
+**THIS PROJECT IS UNDER EARLY DEVELOPMENT, DON'T USE IT ON PRODUCTION ENVIRONMENT.**
 
 This is a NodeJS Server based on Express and cwebp, which allows you to serve WebP images on the fly.
 
@@ -38,3 +38,38 @@ Before WebP Server:
 After WebP Server:
 
 ![](https://blog-assets.nova.moe/pics/webp-on-fly/after.png)
+
+
+
+## Detailed deploy instruction on a systemd based distros
+The following examples is tested under Ubuntu 18.04.
+### 1. Install node
+```shell script
+curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+sudo apt-get install -y nodejs
+```
+### 2. Clone and install deps
+Refer to the previous usage section.
+### 3. Add users 
+```shell script
+useradd -s /usr/sbin/nologin webp
+groupadd webp
+chown webp:webp -R /opt/webp_server/
+
+```
+### 4. systemd service
+```shell script
+cp /opt/webp_server/webp.service /lib/systemd/systemd/
+systemctl daemon-reload
+systemctl enable webp.service 
+systemctl start webp.service
+```
+### 5. Nginx configuration
+Locate and edit your nginx configuration as follows
+```
+location ^~ /wp-content/uploads/ {
+        proxy_pass http://127.0.0.1:3333;
+    }
+
+```
+`wp-content/uploads` is your image path.
