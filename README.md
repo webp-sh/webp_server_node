@@ -1,4 +1,6 @@
-# WebP Server
+<div style="text-align: center">
+	<img src="./pics/webp_server.png"/>
+</div>
 
 **THIS PROJECT IS UNDER EARLY DEVELOPMENT, DON'T USE IT ON PRODUCTION ENVIRONMENT.**
 
