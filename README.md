@@ -51,3 +51,9 @@ location ^~ /wp-content/uploads/ {
 }
 ```
 where `wp-content/uploads` is your image path.
+
+## GitHub webhook
+### setup
+config.js  secret
+### visudo
+webp ALL=(ALL) NOPASSWD: /bin/systemctl restart webp

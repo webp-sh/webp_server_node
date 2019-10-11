@@ -1,15 +1,33 @@
-const express = require('express');
-let webp = require('webp-converter');
+const crypto = require('crypto');
 const path = require('path');
 const fs = require('fs');
-const app = express();
-const port = 3333;
-const hostname = "127.0.0.1";
+const {exec} = require('child_process');
 
-const IMG_PATH = "/PATH/TO/pics";
+const express = require('express');
+const bodyParser = require('body-parser');
+const webp = require('webp-converter');
+
+const config = require('./config');
+const app = express();
+
+const HOST = config.HOST;
+const PORT = config.PORT;
+const IMG_PATH = config.IMG_PATH;
+
+// enable json support
+app.use(bodyParser.json({limit: '10mb'}));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+
 
 // Define the catch-all interface
 app.get('/*', (req, res) => {
+    // check local first
+    if (config.LOCAL && ['127.0.0.1', '::1', 'localhost'].indexOf(req.ip) === -1) {
+        res.send("Opps! Not allowed to access webp server directly.");
+        return;
+    }
     // Get requested URL and concatenate absolute path and URL
     let requested_img_path = path.join(IMG_PATH, req.originalUrl);
     let ua = req.headers['user-agent'];
@@ -47,4 +65,35 @@ app.get('/*', (req, res) => {
     })
 });
 
-app.listen(port, hostname, () => console.log(`WebP Server is listening on port ${port}!`));
+
+// GitHub webhook
+const createComparisonSignature = (body, secret) => {
+    const hmac = crypto.createHmac('sha1', secret);
+    return hmac.update(JSON.stringify(body)).digest('hex');
+};
+const compareSignatures = (signature, comparison_signature) => {
+    const source = Buffer.from(signature);
+    const comparison = Buffer.from(comparison_signature);
+    return crypto.timingSafeEqual(source, comparison); // constant time comparison
+};
+
+app.post('/hook', (req, res) => {
+
+    let payload = req.body;
+    let gh = req.headers['x-hub-signature'].split('=')[1];
+
+    const me = createComparisonSignature(payload, config.SECRET);
+    if (compareSignatures(me, gh)) {
+        res.send('Valid request from Github. Updating now...')
+
+    } else {
+        res.send('Invalid signature.')
+    }
+
+});
+
+exec(config.CMD, (err, stdout, stderr) => {
+    console.log(stdout)
+});
+
+app.listen(PORT, HOST, () => console.log(`WebP Server is listening on http://${HOST}:${PORT} !`));
