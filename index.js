@@ -84,7 +84,10 @@ app.post('/hook', (req, res) => {
 
     const me = createComparisonSignature(payload, config.SECRET);
     if (compareSignatures(me, gh)) {
-        res.send('Valid request from Github. Updating now...')
+        res.send('Valid request from Github. Updating now...');
+        exec(config.CMD, (err, stdout, stderr) => {
+            console.log(stdout)
+        });
 
     } else {
         res.send('Invalid signature.')
@@ -92,8 +95,5 @@ app.post('/hook', (req, res) => {
 
 });
 
-exec(config.CMD, (err, stdout, stderr) => {
-    console.log(stdout)
-});
 
 app.listen(PORT, HOST, () => console.log(`WebP Server is listening on http://${HOST}:${PORT} !`));
