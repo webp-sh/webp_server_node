@@ -1,6 +1,6 @@
 const config = {
     IMG_PATH: "/PATH/TO/pics",
-    SECRET: '123456',
+    SECRET: 'jFDCuhUGtiQ=',
     PORT: '3333',
     HOST: '0.0.0.0',
     LOCAL: true,

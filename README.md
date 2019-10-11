@@ -10,13 +10,13 @@ This is a NodeJS Server based on Express and cwebp, which allows you to serve We
 
 ## Usage
 
-Make sure I've installed `node` on your system, and the version of it shall be greater than 10.
+Make sure You've installed `node` on your system, and the version of it shall be greater than 10.
 
 1. Clone the repo and run `npm install` in it.
 2. Make Sure you've install pm2, if not, use `npm install pm2 -g`
-3. Define your pics folder on `index.js` (for instance there is a `1.jpg` in the related pic folder):
+3. Define your pics folder on `config.js` (for instance there is a `1.jpg` in the related pic folder):
 	```
-	const IMG_PATH = "/PATH/TO/pics"
+	IMG_PATH: "/PATH/TO/pics",
 	```
 4. Run the APP with `pm2 start ecosystem.config.js --env production`, as this is a temporary solution to suppress errors, this should be fixed on later commits.
 5. Let Nginx to `proxy_pass http://localhost:3333/;`
@@ -54,6 +54,7 @@ where `wp-content/uploads` is your image path.
 
 ## GitHub webhook
 ### setup
-config.js  secret
+Setup GitHub webhook to http://ip:3333/hook, then setup an password, edit in `config.js`
 ### visudo
+Add the following line after  `User privilege specification` section.
 webp ALL=(ALL) NOPASSWD: /bin/systemctl restart webp
