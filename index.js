@@ -1,12 +1,16 @@
-const express = require('express');
-let webp = require('webp-converter');
 const path = require('path');
 const fs = require('fs');
-const app = express();
-const port = 3333;
-const hostname = "127.0.0.1";
 
-const IMG_PATH = "/PATH/TO/pics";
+const express = require('express');
+let webp = require('webp-converter');
+
+const config = require('./config');
+const PORT = config.PORT;
+const HOST = config.HOST;
+const IMG_PATH = config.IMG_PATH;
+
+
+const app = express();
 
 // Define the catch-all interface
 app.get('/*', (req, res) => {
@@ -47,4 +51,4 @@ app.get('/*', (req, res) => {
     })
 });
 
-app.listen(port, hostname, () => console.log(`WebP Server is listening on port ${port}!`));
+app.listen(PORT, HOST, () => console.log(`WebP Server is listening on http://${HOST}:${PORT}!`));
