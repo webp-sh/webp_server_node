@@ -1,8 +1,6 @@
-# WebP Server
+![](./pics/webp_server.png)
 
 **THIS PROJECT IS UNDER EARLY DEVELOPMENT, DON'T USE IT ON PRODUCTION ENVIRONMENT.**
-
-![](./pics/webp_server.png)
 
 This is a NodeJS Server based on Express and cwebp, which allows you to serve WebP images on the fly.
 
