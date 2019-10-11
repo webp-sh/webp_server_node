@@ -1,6 +1,6 @@
-<div style="text-align: center">
+<p align="center">
 	<img src="./pics/webp_server.png"/>
-</div>
+</p>
 
 **THIS PROJECT IS UNDER EARLY DEVELOPMENT, DON'T USE IT ON PRODUCTION ENVIRONMENT.**
 
@@ -12,7 +12,7 @@ This is a NodeJS Server based on Express and cwebp, which allows you to serve We
 
 ## Usage
 
-Make sure You've installed `node` on your system, and the version of it shall be greater than 10.
+Make sure you've installed `node` on your system, and the version of it shall be greater than 10.
 
 1. Clone the repo and run `npm install` in it.
 2. Make Sure you've install pm2, if not, use `npm install pm2 -g`
