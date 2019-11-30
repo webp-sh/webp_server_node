@@ -8,7 +8,19 @@ const config = require('./config');
 const PORT = config.PORT;
 const HOST = config.HOST;
 const ALLOWED_TYPES = config.ALLOWED_TYPES;
-let IMG_PATH = config.IMG_PATH;
+var IMG_PATH = config.IMG_PATH;
+
+// GET ENV FOR DOCKER
+if(typeof process.env.IMG_PATH !== 'undefined'){
+	IMG_PATH = process.env.IMG_PATH;
+}
+if(typeof process.env.WEBP_PORT !== 'undefined'){
+	PORT = process.env.WEBP_PORT;
+}
+if(typeof process.env.WEBP_HOST !== 'undefined'){
+	HOST = process.env.WEBP_HOST;
+}
+
 if (process.argv.length === 3)
     IMG_PATH = process.argv[2];
 
