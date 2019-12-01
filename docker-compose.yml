@@ -9,6 +9,6 @@ services:
             - ./EXHAUST:/usr/src/app/webp
             - ./INTAKE:/usr/src/app/pics
         environment:
-            - DOCKER: yes
+            DOCKER: yes
         ports:
             - 3000:3333

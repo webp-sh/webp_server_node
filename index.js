@@ -6,7 +6,7 @@ let webp = require('webp-converter');
 
 const config = require('./config');
 const PORT = config.PORT;
-const HOST = config.HOST;
+var HOST = config.HOST;
 const ALLOWED_TYPES = config.ALLOWED_TYPES;
 var IMG_PATH = config.IMG_PATH;
 

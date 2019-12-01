@@ -2,7 +2,7 @@
 	<img src="./pics/webp_server.png"/>
 </p>
 
-**THIS PROJECT IS UNDER EARLY DEVELOPMENT, DON'T USE IT ON PRODUCTION ENVIRONMENT.**
+**THIS PROJECT IS UNDER DEVELOPMENT, DON'T USE IT ON PRODUCTION ENVIRONMENT.**
 
 This is a NodeJS Server based on Express and cwebp, which allows you to serve WebP images on the fly.
 
@@ -10,7 +10,21 @@ This is a NodeJS Server based on Express and cwebp, which allows you to serve We
 >
 > For Safari and Opera users, the original image will be used.
 
-## Usage
+## Usage(Docker)
+
+If you've docker installed, you can try build the package by doing as follows(don't worry, it's simple):
+
+1. Clone the repo.
+2. run `docker build -t n0vad3v/webp_server .`(Please mind the period in the end).
+3. Copy the `docker-compose.yml` to a folder you like, let's say `/home/nova/server1/`
+4. Edit the `docker-compose.yml`, at line 10 `./INTAKE` to the directory which contains your images.
+5. Run `docker-compose up -d`, and this will make WebP Server listen on `localhost:3000`, configure a NGINX server to reverse proxy it for use.
+
+That't it, the supervision and fail-over is handled by Docker Daemon, no more PM2s or NPMs are needed, Yay!
+
+> Or, if you like the traditional way, see below.
+
+## Usage(Traditional)
 
 Make sure you've installed `node` on your system, and the version of it shall be greater than 10, it will convert `jpg,jpeg,png` files by default, this can be customized by editing the `config.js`.
 
