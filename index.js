@@ -15,6 +15,10 @@ if(typeof process.env.IMG_PATH !== 'undefined'){
 	IMG_PATH = process.env.IMG_PATH;
 }
 
+if(typeof process.env.DOCKER !== 'undefined'){
+	HOST = '0.0.0.0';
+}
+
 if (process.argv.length === 3)
     IMG_PATH = process.argv[2];
 

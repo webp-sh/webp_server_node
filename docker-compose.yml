@@ -6,7 +6,9 @@ services:
         image: n0vad3v/webp_server
         restart: always
         volumes:
-            - ./webp_exhaust:/usr/src/app/webp
-            - ./PATH/TO/IMG_PATH:/usr/src/app/pics
+            - ./EXHAUST:/usr/src/app/webp
+            - ./INTAKE:/usr/src/app/pics
+        environment:
+            - DOCKER: yes
         ports:
             - 3000:3333
