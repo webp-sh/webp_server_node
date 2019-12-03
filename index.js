@@ -4,24 +4,16 @@ const fs = require('fs');
 const express = require('express');
 let webp = require('webp-converter');
 
+// Load config files here
 const config = require('./config');
 const PORT = config.PORT;
-var HOST = config.HOST;
 const ALLOWED_TYPES = config.ALLOWED_TYPES;
-var IMG_PATH = config.IMG_PATH;
-
-// GET ENV FOR DOCKER
-if(typeof process.env.IMG_PATH !== 'undefined'){
-	IMG_PATH = process.env.IMG_PATH;
-}
-
-if(typeof process.env.DOCKER !== 'undefined'){
-	HOST = '0.0.0.0';
-}
+// Docker specified config
+const IMG_PATH = process.env.IMG_PATH || config.IMG_PATH;
+const HOST = process.env.DOCKER ? "0.0.0.0" : config.HOST;
 
 if (process.argv.length === 3)
     IMG_PATH = process.argv[2];
-
 
 const app = express();
 
