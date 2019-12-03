@@ -14,11 +14,10 @@ This is a NodeJS Server based on Express and cwebp, which allows you to serve We
 
 If you've docker installed, you can try build the package by doing as follows(don't worry, it's simple):
 
-1. Clone the repo.
-2. run `docker build -t n0vad3v/webp_server .`(Please mind the period in the end).
-3. Copy the `docker-compose.yml` to a folder you like, let's say `/home/nova/server1/`
-4. Edit the `docker-compose.yml`, at line 10 `./INTAKE` to the directory which contains your images.
-5. Run `docker-compose up -d`, and this will make WebP Server listen on `localhost:3000`, configure a NGINX server to reverse proxy it for use.
+1. Download the `docker-compose.yml` file to a folder you like, let's say `/home/nova/server1/`.
+2. Edit the `docker-compose.yml`, at line 10 `./INTAKE` to the directory which contains your images.
+3. run `docker-compose up -d` in that folder, this will run WebP Server with some parameters written in the `docker-compose.yml` and create the related folders.
+4. Configure a NGINX server to reverse proxy it for public use.
 
 That't it, the supervision and fail-over is handled by Docker Daemon, no more PM2s or NPMs are needed, Yay!
 
