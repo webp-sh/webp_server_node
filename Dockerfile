@@ -11,4 +11,5 @@ COPY . .
 
 EXPOSE 3333
 
+ENV DOCKER=tsuki
 CMD ["node","index.js"]

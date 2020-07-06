@@ -9,7 +9,6 @@ services:
             - ./EXHAUST:/usr/src/app/webp
             - ./INTAKE:/usr/src/app/pics
         environment:
-            DOCKER: tsuki
             NODE_ENV: production
         ports:
             - 3000:3333
